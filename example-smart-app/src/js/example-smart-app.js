@@ -17,7 +17,8 @@
                       code: {
                         $or: ['http://loinc.org|8302-2', 'http://loinc.org|8462-4',
                               'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
-                              'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
+                              'http://loinc.org|2089-1', 'http://loinc.org|55284-4',
+                              'http://loinc.org|44915-7'] // gp
                       }
                     }
                   });
@@ -47,6 +48,8 @@
           var hdl = byCodes('2085-9');
           var ldl = byCodes('2089-1');
 
+          var chl = byCodes('44915-7'); // gp
+
           var p = defaultPatient();
           p.birthdate = dobStr;
           p.gender = gender;
@@ -65,6 +68,8 @@
 
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
+
+          p.chl = chl; // gp
 
           ret.resolve(p);
         });
@@ -90,6 +95,7 @@
       diastolicbp: {value: ''},
       ldl: {value: ''},
       hdl: {value: ''},
+      chl: null // gp
     };
   }
 
@@ -155,6 +161,7 @@
     $('#diastolicbp').html(p.diastolicbp);
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
+    $('#chl').html(p.chl); // gp
   };
 
 })(window);
